@@ -1,0 +1,45 @@
+<md-sidenav class="md-sidenav-left c-sidenav" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="2">
+	<header layout="column" class="c-sidenav__header">
+		<div class="md-headline c-sidenav__header-logo" flex="50" layout="column" layout-align="center center">ReservaWeb</div>
+		<div class="c-sidenav__header-account" layout="row" layout-align="space-between center" flex>
+			<div class="md-button" md-no-ink>
+				<md-icon class="md-36">account_box</md-icon> <span class="md-body-2" data-th-text="${#authentication.principal.username}"></span>
+			</div>
+			<md-button ng-click="$ctrl.logout();">SAIR</md-button>
+		</div> 
+	</header>
+	<md-content flex role="navigation">
+		<ul class="c-sidenav__menu" ng-click="$mdSidenav('left').close();">
+			<li ui-sref-active="active">
+				<md-button ui-sref="main.dashboard">
+					<md-icon>dashboard</md-icon>Dashboard
+				</md-button>
+			</li>
+			<li ui-sref-active="active">
+				<md-button ui-sref="main.patient.view">
+					<md-icon>account_balance</md-icon><span data-th-text="#{ui.labels.patient_register}"></span>
+				</md-button>
+			</li>
+			<li ui-sref-active="active" data-sec-authorize="hasRole('APPROVER')">
+				<md-button ui-sref="main.requests.requests-search">
+					<md-icon>account_balance</md-icon>Liberação de Verba
+				</md-button>
+			</li>
+			<li ui-sref-active="active" data-sec-authorize="hasRole('APPROVER')">
+				<md-button ui-sref="main.requests-to-approval.view">
+					<md-icon>info</md-icon><span data-th-text="#{ui.labels.pending_requests}"></span>
+				</md-button>
+			</li>
+			<li ui-sref-active="active" data-sec-authorize="hasRole('ADMIN')">
+				<md-button ui-sref="main.dayoff.view">
+					<md-icon>date_range</md-icon><span data-th-text="#{ui.labels.dayoff}"></span>
+				</md-button>
+			</li>
+			<li ui-sref-active="active" data-sec-authorize="hasRole('ADMIN')">
+				<md-button ui-sref="main.requests.submit-requests">
+					<md-icon>send</md-icon><span data-th-text="#{ui.labels.submit_requests_dap}"></span>
+				</md-button>
+			</li>
+		</ul>
+	</md-content> 
+</md-sidenav>

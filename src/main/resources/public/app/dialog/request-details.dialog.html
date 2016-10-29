@@ -1,0 +1,86 @@
+<md-dialog aria-label="Solicitação">
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2 data-th-text="#{ui.labels.to_approval.dialog.title}"></h2>
+				<span flex=""></span>
+				<md-button class="md-icon-button" ng-click="dc.cancel()"> 
+					<md-icon aria-label="Close dialog">close</md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content layout-padding="" class="md-body-1 black-text">
+			<div>
+				<table>
+					<tr>
+						<td><strong data-th-text="#{ui.labels.to_approval.dialog.process}"></strong></td>
+						<td>{{dc.request.processNumber | formatProcessNumber}}</td>
+					</tr>
+					<tr>
+						<td><strong data-th-text="#{ui.labels.to_approval.dialog.financingType}"></strong></td>
+						<td>{{dc.request.financingType}}</td>
+					</tr>
+					<tr>
+						<td><strong data-th-text="#{ui.labels.rubric}"></strong></td>
+						<td>{{dc.request.rubricType.message}}</td>
+					</tr>
+					<tr>
+						<td><strong data-th-text="#{ui.labels.reserve_value}"></strong></td>
+						<td>{{dc.request.requestedValue.currency.symbol}} {{dc.request.requestedValue.amount | currency:"":2}}</td>
+					</tr>
+					<tr>
+						<td><strong data-th-text="#{ui.labels.to_approval.dialog.observation}"></strong></td>
+						<td>{{dc.request.observation}}</td>
+					</tr>
+					<tr>
+						<td><strong data-th-text="#{ui.labels.creation_date}"></strong></td>
+						<td>{{dc.request.creationDate | date : "dd/MM/yyyy HH:mm"}}</td>
+					</tr>
+					<tr>
+						<td><strong data-th-text="#{ui.labels.to_approval.dialog.forecastDate}"></strong></td>
+						<td>{{dc.request.creditForecastDate | date : "dd/MM/yyyy"}}</td>
+					</tr>
+<!-- 					<tr> -->
+<!-- 						<td><strong data-th-text="#{ui.labels.to_approval.dialog.situacao}"></strong></td> -->
+<!-- 						<td>{{request.situation.message}}</td> -->
+<!-- 					</tr> -->
+					<tr>
+						<td><strong data-th-text="#{ui.labels.to_approval.dialog.processObservation}"></strong></td>
+						<td>{{dc.request.processObservation}}</td>
+					</tr>
+					
+					
+<!-- 					<tr> -->
+<!-- 						<td><strong data-th-text="#{ui.labels.to_approval.dialog.monetary}"></strong></td> -->
+<!-- 						<td>{{request.requestedValue.currency.code}}</td> -->
+<!-- 					</tr> -->
+					
+					<tr>
+						<td><strong data-th-text="#{ui.labels.to_approval.dialog.requester}"></strong></td>
+						<td>{{dc.request.userName}}</td>
+					</tr>
+					<tr>
+						<td><strong data-th-text="#{ui.labels.to_approval.dialog.status}"></strong></td>
+						<td>{{dc.request.currentState.message}}</td>
+					</tr>
+					<tr ng-show="request.pendencies.length > 0">
+						<td><strong  data-th-text="#{ui.labels.to_approval.dialog.pendencies}"></strong></td>
+						<td>
+							<ul>
+								<li ng-repeat="p in request.pendencies">{{p}}</li>
+							</ul>
+						</td>
+					</tr>
+					
+				</table>
+				<md-divider></md-divider>
+<!-- 				<div style="text-align:center;"> -->
+<!-- 					<md-button class="md-fab md-mini md-warn md-hue-3" ng-disabled="request.currentState.enum == 'APPROVAL_REJECTED'" data-th-title="#{ui.labels.to_approval.button.reject}" data-th-aria-label="#{ui.labels.to_approval.button.reject}" ng-click="reject($event)"> -->
+<!-- 			            <md-icon style="color:white;">thumb_down</md-icon> -->
+<!-- 			        </md-button> -->
+<!-- 			        <md-button class="md-fab md-mini md-primary md-hue-3" ng-disabled="request.currentState.enum == 'WAITING_PROCESS'" data-th-title="#{ui.labels.to_approval.button.approve}" data-th-aria-label="#{ui.labels.to_approval.button.approve}" ng-click="approve($event)"> -->
+<!-- 			        	<md-icon style="color:white;">thumb_up</md-icon> -->
+<!-- 			        </md-button> -->
+<!-- 				</div> -->
+			</div>
+		</md-dialog-content>
+</md-dialog>

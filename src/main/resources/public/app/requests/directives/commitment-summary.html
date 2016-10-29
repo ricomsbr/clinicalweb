@@ -1,0 +1,198 @@
+<md-card
+	ng-attr-id="{{ 'commitment-commitmentAmountId-' + commitment.commitmentAmountId }}"
+	ng-repeat="commitment in vm.commitments" layout-fill="">
+<div layout="row" layout-align="start center" flex=""
+	ng-click="vm.showHideDetails()" class="card-header">
+	<div flex="10" flex-xs="15" flex-sm="15" flex-md="10">
+		<md-icon>work</md-icon>
+	</div>
+	<div flex="">
+		<strong><span class="md-title"
+			data-th-text="#{ui.labels.permanent_material}"></span></strong>
+	</div>
+	<div flex="10" flex-xs="15" flex-sm="15" flex-md="15"
+		class="expand-card-button">
+		<md-icon ng-show="vm.show">expand_less</md-icon>
+		<md-icon ng-hide="vm.show">expand_more</md-icon>
+	</div>
+</div>
+<div ng-show="vm.show">
+	<md-toolbar style="min-height:40%" class="md-primary md-hue-3"
+		ng-show="commitment.reserveValue > commitment.estimatedBalance.amount"
+		layout-align="center center"> <span class="md-subhead"
+		data-th-text="#{ui.messages.request_submission_with_insufficient_funds}">
+	</span> </md-toolbar>
+	<md-toolbar style="min-height:40%" ng-show="commitment.debitPends"
+		layout-align="center center" class="md-primary md-hue-3">
+	<span class="md-subhead"
+		data-th-text="#{ui.messages.request_submission_with_debits} + ': {{commitment.debitPends}}'"></span>
+	</md-toolbar>
+	<md-toolbar ng-show="commitment.disabledProcessPend"
+		style="min-height:40%" layout-align="center center"
+		class="md-primary md-hue-3"> <span class="md-subhead"
+		data-th-text="'{{commitment.disabledProcessPend}}'"></span> </md-toolbar>
+	<md-toolbar ng-show="commitment.paymentPends" style="min-height:40%"
+		layout-align="center center" class="md-primary md-hue-3">
+	<span class="md-subhead"
+		data-th-text="#{ui.messages.request_submission_with_pay_pendencies} + ': {{commitment.paymentPends}}'"></span>
+	</md-toolbar>
+	<md-toolbar ng-show="!commitment.hasPaymentOption"
+		class="md-primary md-hue-3" style="min-height:40%"
+		layout-align="center center"> <span class="md-subhead"
+		data-th-text="#{ui.messages.request_submission_with_no_payment_option}"></span>
+	</md-toolbar>
+	<md-toolbar ng-show="commitment.validitytPend.expired"
+		class="md-primary md-hue-3" style="min-height:40%"
+		layout-align="center center"> <span class="md-subhead"
+		data-th-text="#{ui.messages.validitytPend}"></span> </md-toolbar>
+	<md-toolbar style="min-height:40%" layout-align="center center"
+		ng-show="vm.msg" class="md-subhead"> <span
+		class="md-subhead" data-th-text="vm.msg"> </span> </md-toolbar>
+
+	<p layout-xs="column" layout-sm="column" layout-md="column"
+		layout-align-xs="center center" layout-align-sm="center center"
+		layout-align-md="center center">
+		<strong data-th-text="#{ui.labels.available_balance} + ':'"
+			style="text-align: center"></strong> <span style="text-align: center">{{commitment.estimatedBalance.amount
+			| currency}}</span>
+	</p>
+	<form name="addRequestForm" novalidate="novalidate">
+		<div ng-show="commitment.hasPaymentOption" layout="row"
+			layout-md="column" layout-sm="column" layout-xs="column" flex="100"
+			layout-wrap="">
+			<md-input-container flex="25" flex-xs="100" flex-sm="100"
+				flex-md="100"> <label
+				data-th-text="#{ui.labels.reserve_value}"></label> <input
+				type="text" ng-model="commitment.reserveValue" id="reserveValue"
+				name="reserveValue" required="required" tabindex="1" min="0.01"
+				ng-model-options="{ updateOn: 'keyup  blur', debounce: { 'default': 0, 'blur': 0 } }"
+				ng-attr-ui-number-mask="{{commitment.allowDecimalValue ? '' : '0'}}"
+				focus-me="" /> <span ng-show=""></span>
+			<div ng-messages="addRequestForm.reserveValue.$error"
+				ng-show="addRequestForm.reserveValue.$dirty">
+				<div ng-message="required"
+					data-th-text="#{ui.messages.required_value}"></div>
+				<div ng-message="min" data-th-text="#{ui.messages.invalid_value}">
+				</div>
+				<div ng-message="max" data-th-text="#{ui.messages.invalid_value}">
+				</div>
+			</div>
+			</md-input-container>
+			<md-input-container flex="65" flex-xs="100" flex-sm="100"
+				flex-md="100"> <label
+				data-th-text="#{ui.labels.observation}"></label> <input
+				ng-model="commitment.observation" name="observation"
+				ng-model-options="{updateOn: 'default blur', debounce: {default: 0, blur: 0} }"
+				required="required" tabindex="2" maxlength="150" />
+			<div ng-messages="addRequestForm.observation.$error"
+				ng-show="addRequestForm.observation.$dirty">
+				<div ng-message="required"
+					data-th-text="#{ui.messages.required_value}"></div>
+			</div>
+			</md-input-container>
+			<md-input-container flex="5" flex-xs="100" flex-sm="100"
+				flex-md="100"> <md-button hide-xs=""
+				hide-sm="" hide-md="" ng-click="vm.add(commitment)"
+				class="md-icon-button md-accent" name="addButton"
+				ng-disabled="addRequestForm.$invalid" tabindex="3"> <md-icon>add_circle</md-icon>
+			</md-button> <md-button hide="" show-xs="" show-sm="" show-md="" style="margin-top: 0%; margin-bottom: 0%;margin-right: 35%;margin-left:35%;"
+				ng-click="vm.add(commitment)" class="md-raised md-accent"
+				name="addButton" ng-disabled="addRequestForm.$invalid" tabindex="3"
+				data-th-text="#{ui.labels.add}"></md-button> </md-input-container>
+		</div>
+	</form>
+	<div ng-show="commitment.requests.content != ''" layout="row" hide-md=""
+		hide-sm="" hide-xs="" flex="">
+		<div flex="20">
+			<strong data-th-text="#{ui.labels.reserve_value}"></strong>
+		</div>
+		<div flex="20">
+			<strong data-th-text="#{ui.labels.observation}"></strong>
+		</div>
+		<div flex="15">
+			<strong data-th-text="#{ui.labels.creation_date}"></strong>
+		</div>
+		<div flex="15">
+			<strong data-th-text="#{ui.labels.creditForecastDate}"></strong>
+		</div>
+		<div flex="20">
+			<strong data-th-text="#{ui.labels.status}"></strong>
+		</div>
+		<div flex="10"></div>
+	</div>
+	<div>
+		<div layout="row" hide-md="" hide-sm="" hide-xs="" flex=""
+			ng-repeat="item in commitment.requests.content | orderBy:'-creationDate'"
+			layout-wrap="">
+			<div flex="20" layout="row" layout-align="start center">
+				{{item.requestedValue.amount|currency:item.requestedValue.currency.symbol
+				+ ' '}}</div>
+			<div flex="20" title="{{item.observation}}" layout="row"
+				layout-align="start center">{{ item.observation | limitTo : 25
+				: 0}}</div>
+			<div flex="15" layout="row" layout-align="start center">{{item.creationDate
+				| date : 'd/M/yyyy HH:mm' }}</div>
+			<div flex="15" layout="row" layout-align="start center">{{item.creditForecastDate
+				| date : 'd/M/yyyy' }}</div>
+			<div flex="20" layout="row" layout-align="start center">
+				{{item.currentState.message}}
+				<span ng-if="item.fromDapHistory" data-th-text="#{ui.labels.fromDapHistory}"></span>
+			</div>
+			<div flex="10" flex-xs="100" flex-sm="100" flex-md="100" layout="row"
+				layout-align="center center">
+				<md-button type="button" hide="" show-xs="" show-sm="" show-md=""
+					flex="100" ng-click="vm.remove(commitment, item)"
+					class="md-raised md-warn" name="removeButton"
+					tabindex="{{vm.tabindex + 2 + (3 * $index)}}"
+					data-th-text="#{ui.labels.remove}"
+					ng-disabled="item.disableDeleteButton"></md-button>
+				<md-button type="button" hide-xs="" hide-sm="" hide-md="" flex="100"
+					ng-click="vm.remove(commitment, item)"
+					ng-disabled="!item.canDelete || item.disableDeleteButton"
+					class="md-icon-button md-warn" name="removeButton"
+					tabindex="{{vm.tabindex + 2 + (3 * $index)}}"> <md-icon>remove_circle</md-icon>
+				</md-button>
+			</div>
+		</div>
+	</div>
+	<hr/>
+	<div ng-show="commitment.requests.content != ''" layout="column"
+		layout-padding="layout-padding" hide="" show-xs="" show-sm=""
+		show-md="" flex="100"
+		ng-repeat="item in commitment.requests.content | orderBy:'-creationDate'">
+		<div flex="" layout="column" layout-align="center center">
+			<strong data-th-text="#{ui.labels.reserve_value}"></strong> {{' ' +
+			item.requestedValue.amount|currency:item.requestedValue.currency.symbol
+			+ ' '}}
+		</div>
+		<div flex="" layout="column" layout-align="center center">
+			<strong data-th-text="#{ui.labels.observation}"></strong> {{ ' ' +
+			item.observation | limitTo : 20 : 0}}
+		</div>
+		<div flex="" layout="column" layout-align="center center">
+			<strong data-th-text="#{ui.labels.creation_date}"></strong>
+			{{item.creationDate | date : 'd/M/yyyy HH:mm' }}
+		</div>
+		<div flex="" layout="column" layout-align="center center">
+			<strong data-th-text="#{ui.labels.creditForecastDate}"></strong>
+			{{item.creditForecastDate | date : 'd/M/yyyy' }}
+		</div>
+		<div flex="" layout="column" layout-align="center center">
+			<strong data-th-text="#{ui.labels.status}"></strong> 
+				<span style="text-align: center">
+					{{item.currentState.message}}<span ng-if="item.fromDapHistory" data-th-text="#{ui.labels.fromDapHistory}"></span>
+				</span>
+		</div>
+		<div flex="" layout="column" layout-align="center center">
+			<md-button type="button" flex="100"
+				ng-click="vm.remove(commitment, item)" class="md-raised md-warn"
+				name="removeButton" tabindex="{{vm.tabindex + 2 + (3 * $index)}}"
+				ng-disabled="!item.canDelete || item.disableDeleteButton"
+				data-th-text="#{ui.labels.remove}"></md-button>
+		</div>
+		<div>
+		<hr/>
+		</div>
+	</div>
+</div>
+</md-card>

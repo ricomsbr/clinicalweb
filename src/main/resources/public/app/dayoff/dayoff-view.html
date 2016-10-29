@@ -1,0 +1,77 @@
+<md-card flex="" flex-sm="100" id="dayoff-id"> 
+	<md-card-content>
+		<div layout="row" layout-sm="column"  layout-md="column" layout-xs="column">
+			<div flex="50" flex-sm="100" flex-md="100" flex-xs="100">
+				<h4 data-th-text="#{ui.labels.dayoff.option}"></h4>
+		    	<md-radio-group ng-model="view.option" ng-change="view.change()">
+		      		<md-radio-button value="1" class="md-primary" data-th-text="#{ui.labels.dayoff.option.day}"></md-radio-button>
+		      		<md-radio-button value="2" class="md-primary" data-th-text="#{ui.labels.dayoff.option.period}"></md-radio-button>
+		    	</md-radio-group>
+		    	<h4 ng-show="view.option == 2" data-th-text="#{ui.labels.dayoff.optionPeriod}"></h4>
+		    	<md-radio-group ng-model="view.optionPeriod" ng-show="view.option == 2">
+		      		<md-radio-button value="1" class="md-primary" data-th-text="#{ui.labels.dayoff.optionPeriod.include}"></md-radio-button>
+		      		<md-radio-button value="2" class="md-warn" data-th-text="#{ui.labels.dayoff.optionPeriod.exclude}"></md-radio-button>
+		    	</md-radio-group>
+				<form name="myForm">
+					<h4 ng-show="view.option != 2" data-th-text="#{ui.labels.dayoff.date}"></h4>
+					<h4 ng-show="view.option == 2" data-th-text="#{ui.labels.dayoff.date.start}"></h4>
+			    	<md-datepicker name="dateField" required="" ng-model="view.myDate1" md-placeholder="Entre com o data" ng-change="view.change()"></md-datepicker>
+			    	<div style="font-size: 11px;color: darkred;margin: 10px 0 0 25px;" ng-messages="myForm.dateField.$error" ng-show="myForm.dateField.$dirty">
+		        		<div ng-message="required" data-th-text="#{ui.labels.dayoff.date.required}"></div>
+		      		</div>
+			    	<h4 ng-show="view.option == 2" data-th-text="#{ui.labels.dayoff.date.end}"></h4>
+			    	<md-datepicker ng-show="view.option == 2" name="dateField2" required="" md-min-date="view.myDate1" ng-model="view.myDate2" md-placeholder="Entre com a data"  ng-change="view.change()"></md-datepicker>
+			    	<div style="font-size: 11px;color: darkred;margin: 10px 0 0 25px;" ng-messages="myForm.dateField2.$error" ng-show="myForm.dateField2.$dirty">
+		        		<div ng-message="required" data-th-text="#{ui.labels.dayoff.date.required}"></div>
+		        		<div ng-message="mindate" data-th-text="#{ui.labels.dayoff.date.mindate}"></div>
+		      		</div>
+		      		<div layout="column" ng-hide="view.optionPeriod == 2 &amp;&amp; view.option == 2">
+		      			<md-input-container class="md-block" flex-gt-sm="" ng-hide="view.dayoff &amp;&amp; view.option == 1">
+		      				<label data-th-text="#{ui.labels.dayoff.description}"></label>
+		      				<input type="text" ng-model="view.description" maxlength="255" ></input>
+		          		</md-input-container>
+		          		<h4 ng-show="view.dayoff &amp;&amp; view.option == 1" data-th-text="#{ui.labels.dayoff.description}"></h4>
+		          		<span ng-show="view.dayoff &amp;&amp; view.option == 1">{{view.description}}</span>
+		          		<br ng-show="view.dayoff &amp;&amp; view.option == 1"></br>
+		        	</div>
+			    	<md-button ng-show="!view.dayoff &amp;&amp; view.option == 1" class="md-raised md-primary" ng-click="view.include()" data-th-text="#{ui.labels.dayoff.button.include}"></md-button>
+			      	<md-button ng-show="view.dayoff &amp;&amp; view.option == 1" class="md-raised md-warn" ng-click="view.exclude()" data-th-text="#{ui.labels.dayoff.button.exclude}"></md-button>
+			      	<md-button ng-show="view.optionPeriod == 1 &amp;&amp; view.option == 2" class="md-raised md-primary" ng-click="view.include()" data-th-text="#{ui.labels.dayoff.button.all.include}"></md-button>
+			      	<md-button ng-show="view.optionPeriod == 2 &amp;&amp; view.option == 2" class="md-raised md-warn" ng-click="view.exclude()" data-th-text="#{ui.labels.dayoff.button.all.exclude}">Excluir todas</md-button>
+		      	</form>
+			</div>
+			<div flex="" hide-lg="" hide-gt-lg="" hide-xl="" ng-show="view.listDayOff.length > 0">
+				<br/>
+				<md-divider></md-divider>
+			</div>
+			<div flex="50" flex-sm="100"  flex-md="100" flex-xs="100" ng-show="view.listDayOff.length > 0">
+				<h4 data-th-text="#{ui.labels.dayoff.list}"></h4>
+				<md-list flex="">
+        			<md-list-item class="md-2-line" ng-repeat="item in view.listDayOff">
+          				<div class="md-list-item-text" layout="column">
+	            			<h3>{{item.date | date : 'dd/MM/yyyy'}}</h3>
+	            			<p ng-hide="item.edit">{{item.description}}</p>
+	            			<md-input-container ng-show="item.edit" class="md-caption">
+	            				<input ng-attr-id="{{ 'description-' + item.id }}" type="text" md-maxlength="255" ng-model="item.description" data-th-attr="aria-label=#{ui.labels.dayoff.description.edit.aria-label}"></input>
+          					</md-input-container>
+          				</div>
+          				<div layout="column" ng-show="item.edit">
+	          				<md-button class="md-raised md-primary" data-th-text="#{ui.labels.dayoff.description.edit.save}" data-th-title="#{ui.labels.dayoff.description.edit.save}" ng-click="view.editSave(item)">
+	          				</md-button>
+	          				<md-button class="md-raised" data-th-text="#{ui.labels.dayoff.description.edit.cancel}" data-th-title="#{ui.labels.dayoff.description.edit.cancel}" ng-click="view.editCancel(item)">
+	          				</md-button>
+          				</div>
+          				<div layout="row" ng-hide="item.edit">
+	          				<md-button class="md-fab md-mini md-primary" data-th-title="#{ui.labels.dayoff.edit.item.title}" ng-click="view.edit(item)">
+	          					<md-icon>mode_edit</md-icon>
+	          				</md-button>
+	          				<md-button class="md-fab md-mini md-warn"  data-th-title="#{ui.labels.dayoff.exclude.item.title}" ng-click="view.excludeItem(item)">
+		          				<md-icon>remove</md-icon>
+	          				</md-button>
+          				</div>
+        			</md-list-item>
+        		</md-list>
+			</div>
+		</div>
+	</md-card-content>
+</md-card>

@@ -1,0 +1,65 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.1.RELEASE'
+	}
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		maven { url "http://repo.spring.io/release" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'spring-boot'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	maven { url "http://repo.spring.io/release" }
+	maven { url "http://repo.spring.io/milestone" }
+}
+
+ext {
+	kryoVersion = '4.0.0'
+	angularVersion = '1.5.8'
+	angularMaterialVersion = '1.1.1'
+}
+
+dependencies {
+	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	compile 'org.springframework.boot:spring-boot-starter-actuator'
+	compile 'org.springframework.boot:spring-boot-starter-security'
+	compile "org.springframework.boot:spring-boot-configuration-processor"
+	compile "org.springframework.session:spring-session"
+	compile "com.fasterxml.jackson.core:jackson-core"
+	compile "com.fasterxml.jackson.core:jackson-annotations"
+	compile "com.fasterxml.jackson.core:jackson-databind"
+	compile "com.hazelcast:hazelcast"
+	compile "com.esotericsoftware:kryo:$kryoVersion"
+	compile "org.thymeleaf.extras:thymeleaf-extras-springsecurity4"
+	runtime "org.webjars.bower:angular:$angularVersion"
+	runtime "org.webjars.bower:angular-aria:$angularVersion"
+	runtime "org.webjars.bower:angular-animate:$angularVersion"
+	runtime "org.webjars.bower:angular-resource:$angularVersion"
+	runtime "org.webjars.bower:angular-messages:$angularVersion"
+	runtime "org.webjars.bower:angular-material:$angularMaterialVersion"
+	runtime "org.webjars.bower:angular-i18n:$angularVersion"
+	runtime 'org.webjars.bower:angular-ui-router:1.0.0-beta.3'
+	runtime "org.webjars.bower:angular-translate:2.8.1"
+	runtime "org.webjars.bower:angular-translate-loader-url:2.8.0"
+	runtime 'org.webjars.bower:angular-input-masks:2.1.1'
+	runtime 'org.webjars.bower:animate.css:3.4.0'
+	runtime 'org.webjars.bower:font-awesome:4.6.3'
+	testRuntime "org.webjars.bower:jasmine:2.3.4"
+}
+
+tasks.withType(JavaCompile) {
+	options.compilerArgs << '-parameters'
+}

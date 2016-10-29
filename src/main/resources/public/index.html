@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Sistema de Reserva</title>
+	<link rel="stylesheet" href="css/material-icons.css" type="text/css" />
+	<link rel="stylesheet" href="css/roboto.css" type="text/css"/>
+	<link rel="stylesheet" href="webjars/font-awesome/4.6.3/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="webjars/angular-material/1.1.1/angular-material.min.css" type="text/css" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<link rel="stylesheet" href="css/palette.css" type="text/css" />
+	<link rel="stylesheet" href="webjars/animate.css/3.4.0/animate.min.css" />
+</head>
+<body ng-app="app" ng-cloak class="ng-cloak">
+	
+	<ui-view></ui-view>
+	
+	<!-- angular dependencies  -->
+	<script src="webjars/angular/1.5.8/angular.js"></script>
+	<script src="webjars/angular-animate/1.5.8/angular-animate.min.js"></script>
+	<script src="webjars/angular-aria/1.5.8/angular-aria.min.js"></script>
+	<script src="webjars/angular-resource/1.5.8/angular-resource.min.js"></script>
+	<script src="webjars/angular-messages/1.5.8/angular-messages.min.js"></script>
+	<script src="webjars/angular-i18n/1.5.8/angular-locale_pt-br.js"></script>
+	<script src="webjars/angular-translate/2.8.1/angular-translate.js"></script>
+	<script	src="webjars/angular-translate-loader-url/2.8.0/angular-translate-loader-url.js"></script>
+	<script src="webjars/angular-material/1.1.1/angular-material.min.js"></script>
+	<script src="webjars/angular-ui-router/1.0.0-beta.3/release/angular-ui-router.js" type="text/javascript"></script>
+	<script src="webjars/angular-input-masks/2.1.1/angular-input-masks-standalone.min.js"></script>
+		
+	<!-- application bootstrap -->
+	<script src="app/app.module.js"></script>
+	<script src="app/app.config.js"></script>
+	
+	<!-- main module -->
+	<script src="app/main/main.module.js"></script>
+	<script src="app/main/main.routes.js"></script>
+	<script src="app/main/main.component.js"></script>
+	<script src="app/main/main.service.js"></script>
+	<script src="app/main/user.service.js"></script>
+	<script src="app/main/sidebar.component.js"></script>
+
+	<!-- shared module -->	
+	<script src="app/shared/shared.module.js"></script>
+	<script src="app/shared/directives/process-number-validator.directive.js"></script>
+	<script src="app/shared/directives/decimal-mask.directive.js"></script>
+	<script src="app/shared/directives/focus-me.directive.js"></script>
+	<script src="app/shared/directives/allowed-roles.directive.js"></script>
+	<script src="app/shared/filters/cpf-format.filter.js"></script>
+	<script src="app/shared/filters/currency-value-mask.filter.js"></script>
+	<script src="app/shared/filters/process-number.filter.js"></script>
+	<script src="app/shared/filters/remove-not-numeric-characters.filter.js"></script>
+	<script src="app/shared/services/commitment.service.js"></script>
+	<script src="app/shared/services/process.service.js"></script>
+	<script src="app/shared/services/request.service.js"></script>
+	<script src="app/shared/services/dayoff.service.js"></script>
+	<script src="app/shared/services/patient.service.js"></script>
+	
+	<!-- interceptor module -->	
+	<script src="app/interceptor/interceptor.module.js"></script>
+	<script src="app/interceptor/interceptor.config.js"></script>
+	<script src="app/interceptor/interceptor.service.js"></script>
+	
+	
+	<!-- dashboard module -->
+	<script src="app/dashboard/dashboard.module.js"></script>
+	<script src="app/dashboard/dashboard.config.js"></script>
+
+	<!-- requests module -->
+	<script src="app/requests/requests.module.js"></script>
+	<script src="app/requests/requests-to-approval.module.js"></script>
+	<script src="app/requests/requests.config.js"></script>
+	<script src="app/requests/requests-to-approval.config.js"></script>
+	<script src="app/requests/requests-search.controller.js"></script>
+	<script src="app/requests/requests-view.controller.js"></script>
+	<script src="app/requests/requests-to-approval.controller.js"></script>
+	
+	<!-- dayoff module -->
+	<script src="app/dayoff/dayoff.module.js"></script>
+	<script src="app/dayoff/dayoff.config.js"></script>
+	<script src="app/dayoff/dayoff.controller.js"></script>
+	
+	<!-- patient module -->
+	<script src="app/patient/patient.module.js"></script>
+	<script src="app/patient/patient.config.js"></script>
+	<script src="app/patient/patient.controller.js"></script>
+	
+	<!-- directives -->
+	<script src="app/requests/directives/commitment-summary.directive.js"></script>
+	<script src="app/requests/directives/commitment-summary-mm.directive.js"></script>
+	<script src="app/requests/directives/submit-requests.directive.js"></script>
+	<script src="app/requests/directives/process-accounts.directive.js"></script>
+	<script src="app/requests/directives/process-summary.directive.js"></script>
+	
+</body>
+</html>

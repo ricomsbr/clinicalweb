@@ -1,0 +1,113 @@
+<md-card layout-fill="" style="height:auto"> <md-content>
+<div layout="row" layout-align="start center" flex=""
+	ng-click="summaryVm.showHideDetails()" class="card-header">
+	<div flex="10" flex-xs="15" flex-sm="15" flex-md="10">
+		<md-icon>work</md-icon>
+	</div>
+	<div flex="">
+		<strong><span class="md-title"
+			data-th-text="#{ui.labels.process_info}"></span></strong>
+	</div>
+	<div flex="10" flex-xs="15" flex-sm="15" flex-md="15"
+		class="expand-card-button">
+		<md-icon ng-show="summaryVm.show">expand_less</md-icon>
+		<md-icon ng-hide="summaryVm.show">expand_more</md-icon>
+	</div>
+</div>
+<div ng-show="summaryVm.show" class="md-body-1" layout="row"
+	layout-align="start start">
+	<div layout="column" layout-margin="" layout-align="center start">
+		<p>
+			<strong data-th-text="#{ui.labels.process_number}"></strong>
+			{{summaryVm.process.number | formatProcessNumber}}
+		</p>
+		<p>
+			<strong data-th-text="#{ui.labels.username}"></strong>
+			{{summaryVm.process.username}}
+		</p>
+		<p>
+			<strong data-th-text="#{ui.labels.duration}"></strong>
+			{{summaryVm.process.validity.start | date:'dd/MM/yyyy'}} <span
+				data-th-text="#{ui.labels.to}"></span>
+			{{summaryVm.process.validity.end | date:'dd/MM/yyyy'}}
+		</p>
+		<p>
+			<strong data-th-text="#{ui.labels.first_concession}"></strong>
+			{{summaryVm.process.firstConcessionDate | date:'dd/MM/yyyy'}}
+		</p>
+		<p>
+			<strong data-th-text="#{ui.labels.situation}"></strong>
+			{{summaryVm.process.situation.message}}
+		</p>
+		<p>
+			<strong data-th-text="#{ui.labels.observation}"></strong>
+			{{summaryVm.process.observation}}
+		</p>
+		<p
+			ng-if="summaryVm.pendencies.paymentPendencies.length > 0 || summaryVm.pendencies.debitPendencies.length > 0">
+			<strong data-th-text="#{ui.labels.pendencies}"></strong>
+		</p>
+	</div>
+	<div layout="column" layout-margin="" layout-align="center start">
+		<p>
+			<strong data-th-text="#{ui.labels.cpf}"></strong>
+			{{summaryVm.accounts.cpf | formatCpf}}
+		</p>
+		<p>
+			<strong data-th-text="#{ui.labels.financing_type}"></strong>
+			{{summaryVm.accounts.financingType}}
+		</p>
+
+		<p ng-if="summaryVm.accounts.checkingBankAcc">
+			<strong data-th-text="#{ui.labels.checking_account}"></strong>
+			<strong data-th-text="#{ui.labels.account_bank}"></strong>
+			{{summaryVm.accounts.checkingBankAcc.bankNumber}}
+			<strong data-th-text="#{ui.labels.account_agency}"></strong>
+			{{summaryVm.accounts.checkingBankAcc.agencyNumber}}
+			<strong data-th-text="#{ui.labels.account_account}"></strong>
+			{{summaryVm.accounts.checkingBankAcc.accountNumber}}
+		</p>
+		<p ng-if="summaryVm.accounts.institutionBankAcc">
+			<strong data-th-text="#{ui.labels.institutional_account}"></strong>
+			<span data-th-text="#{ui.labels.account_bank}"></span>
+			{{summaryVm.accounts.institutionBankAcc.bankNumber}}
+			<span data-th-text="#{ui.labels.account_agency}"></span>
+			{{summaryVm.accounts.institutionBankAcc.agencyNumber}}
+			<span data-th-text="#{ui.labels.account_account}"></span>
+			{{summaryVm.accounts.institutionBankAcc.accountNumber}}
+		</p>
+		<p ng-if="summaryVm.accounts.bankCard">
+			<strong data-th-text="#{ui.labels.research_card}"></strong> <span
+				data-th-text="#{ui.labels.masking_card}" class="md-caption"></span>{{summaryVm.accounts.bankCard.segment4}}
+			{{summaryVm.accounts.bankCard.cardStatus}}&nbsp;
+			<strong data-th-text="#{ui.labels.validity_card}"></strong>
+			{{summaryVm.accounts.bankCard.validity}}
+		</p>
+		<p ng-if="summaryVm.accounts.bankCard">
+			<strong data-th-text="#{ui.labels.limit_card}"></strong>
+			{{summaryVm.accounts.bankCard.limit.amount | currency}}&nbsp;&nbsp;
+			<strong data-th-text="#{ui.labels.total_expended_card}"></strong>
+			{{summaryVm.accounts.bankCard.totalExpended.amount | currency}}&nbsp;&nbsp;
+			<strong data-th-text="#{ui.labels.balance_card}"></strong>
+			{{summaryVm.accounts.bankCard.balance.amount | currency}}
+		</p>
+		<p ng-if="summaryVm.process.coordination">
+			<strong data-th-text="#{ui.labels.coordination}"></strong>
+			{{summaryVm.process.coordination}}
+		</p>
+		<p ng-if="summaryVm.process.covenants">
+			<strong data-th-text="#{ui.labels.covenants}"></strong>
+			<span ng-if="summaryVm.process.covenants.length == 1" ng-repeat="p in summaryVm.process.covenants">{{p}}</span>
+		</p>
+		<ul ng-if="summaryVm.process.covenants &#38;&#38; summaryVm.process.covenants.length > 1">
+			<li ng-repeat="p in summaryVm.process.covenants">{{p}}</li>
+		</ul>
+		<ul>
+			<li ng-repeat="p in summaryVm.pendencies.debitPendencies">
+				{{p.type.message}}</li>
+			<li ng-repeat="p in summaryVm.pendencies.paymentPendencies">
+				{{p.message}}</li>
+		</ul>
+	</div>
+</div>
+</md-content> </md-card>

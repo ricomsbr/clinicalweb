@@ -1,0 +1,230 @@
+@CHARSET "UTF-8";
+
+.o-content-view {
+	overflow: hidden;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.c-sidenav {
+	background: #FFFFFF;
+}
+
+.c-sidenav,
+.c-sidenav.md-locked-open-active,
+.c-sidenav.md-locked-open {
+	width: 320px;
+	min-width: 320px;
+	max-width: 320px;
+	
+}
+
+.c-sidenav__header {
+	height: 180px;
+	min-height: 180px;
+	max-height: 180px;
+	padding: 2px 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.c-sidenav__header-logo {
+	margin: 1rem auto;
+}
+
+.c-sidenav__header-account {
+/* 	padding: 0 16px; */
+}
+
+.c-sidenav md-content {
+	background: transparent;
+}
+
+.c-sidenav__menu,
+.c-sidenav__menu ul {
+  list-style: none;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.c-sidenav__menu li {
+  margin: 0;
+}
+.c-sidenav__menu > li:nth-child(1) {
+  border-top: none;
+}
+
+.c-sidenav__menu .md-button {
+  border-radius: 0;
+  cursor: pointer;
+  display: block;
+  align-items: inherit;
+  line-height: 40px;
+  margin: 0;
+  max-height: 40px;
+  overflow: hidden;
+  padding: 0px 16px;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  width: 100%;
+}
+
+.c-sidenav__menu .md-button md-icon {
+  padding-right: 1em;
+}
+
+.c-sidenav__menu li.active {
+  background: rgba(158,158,158,0.2);
+}
+
+.menu-toggle-list {
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  -webkit-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  -webkit-transition-property: height;
+  -moz-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  -moz-transition-property: height;
+  transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  transition-property: height;
+}
+.docs-menu .menu-toggle-list a.md-button {
+  display: block;
+  padding: 0 16px 0 32px;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  font-weight: 500;
+}
+
+.c-navbar {
+/*   z-index: 3; */
+  background-color: #004282 !important;
+}
+
+.md-whiteframe-glow-z1 {
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14),
+              0px 0px 2px 2px rgba(0, 0, 0, 0.098),
+              0px 0px 5px 1px rgba(0, 0, 0, 0.084);
+}
+
+md-toolbar.demo-toolbar {
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 1px rgba(255, 255, 255, 0.1);
+}
+
+
+/***************
+ * TYPE DEFAULTS
+ ***************/
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  margin-left: 16px;
+  padding: 0;
+  margin-top: 3px;
+  list-style-position: inside;
+}
+
+ul li:first-child {
+  margin-top: 0;
+} 
+
+a {
+	text-decoration: none;
+	font-weight: 400;
+	-webkit-transition: border-bottom 0.35s;
+	-moz-transition: border-bottom 0.35s;
+	-ms-transition: border-bottom 0.35s;
+	-o-transition: border-bottom 0.35s;
+	transition: border-bottom 0.35s;
+}
+
+
+
+/***************
+ * MATERIAL ICONS
+ ***************/
+/* Rules for sizing the icon. */
+md-icon.material-icons.md-18 {
+	font-size: 18px;
+	height: 18px;
+	width: 18px;
+}
+
+md-icon.material-icons.md-24 {
+	font-size: 24px;
+	height: 24px;
+	width: 24px;
+}
+
+md-icon.material-icons.md-36 {
+	font-size: 36px;
+	height: 36px;
+	width: 36px;
+}
+
+md-icon.material-icons.md-48 {
+	font-size: 48px;
+	height: 48px;
+	width: 48px;
+}
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark {
+	color: rgba(0, 0, 0, 0.54);
+}
+
+.material-icons.md-dark.md-inactive {
+	color: rgba(0, 0, 0, 0.26);
+}
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light {
+	color: rgba(255, 255, 255, 1);
+}
+
+.material-icons.md-light.md-inactive {
+	color: rgba(255, 255, 255, 0.3);
+}
+
+
+
+/* legacy */
+
+.content-panel-background {
+  background-color: #f5f5f5;
+}
+
+md-sidenav  > md-toolbar {
+  padding: 15px;
+  height: 150px;
+  max-height: 150px;
+}
+md-sidenav md-list-item.md-2-line .md-list-item-text {
+  padding-top: 14px;
+  padding-bottom: 12px;
+}
+md-sidenav md-divider {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+/* More closely matches https://www.google.com/design/spec/components/lists.html#lists-specs */
+md-list-item.md-3-line md-divider[md-inset] {
+  left: 70px;
+}
+.effect-1:hover {
+  background: rgb(33,150,243);
+  color: white;
+}
+.effect-1.active {
+  background: rgb(33,150,243);
+  color: white;
+}
+
+.card-header{background-color:#d9d9d9;cursor:pointer;}
+.expand-card-button{text-align: right;cursor:pointer;}
+p {line-height: 90%;}
+

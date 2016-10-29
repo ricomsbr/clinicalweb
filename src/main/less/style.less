@@ -1,0 +1,221 @@
+// Colors
+@background-color: #f5f5f5; 
+
+.ng-cloak {
+	display: none;
+}
+
+// Main content bg color
+.content-panel-background {
+	background-color: @background-color; 
+}
+
+
+// Navigation drawer pattern: https://www.google.com/design/spec/patterns/navigation-drawer.html#navigation-drawer-specs
+md-sidenav {
+  & > md-toolbar {
+    padding: 15px;
+    height: 150px;
+    max-height: 150px;
+  }
+  & md-list-item.md-2-line .md-list-item-text {
+    padding-top: 14px;
+    padding-bottom: 12px;
+  }
+  & md-divider {
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+}
+
+/* More closely matches https://www.google.com/design/spec/components/lists.html#lists-specs */
+md-list-item.md-3-line {
+  md-divider {
+    &[md-inset] {
+      left: 70px;
+    }
+  }
+}
+
+
+/*
+md-toolbar md-icon.md-default-theme {
+  color: white; 
+}
+  
+md-toolbar .md-button .navicon {
+	line-height: 1.1em;
+	font-size: 1.5em;
+}
+
+md-sidenav ul {
+	list-style: none;
+	padding: 0px;
+	.md-button {
+		display: block;
+		line-height: 4rem;
+		padding: 0 1rem;
+		text-transform: none;
+		font-weight: 400;
+		text-align: left;
+		margin: 0px;
+		font-size: inherit;
+		height: inherit;
+	}
+}
+
+md-list-item, md-list-item .md-list-item-inner {
+	display: flex;
+	align-items: center;
+}
+
+button.md-no-style {
+	font-weight: normal;
+	background-color: inherit;
+	text-align: left;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+md-list-item.md-no-proxy, md-list-item .md-no-style {
+	position: relative;
+	padding: 0 1rem;
+	flex: 1;
+}
+
+md-list-item .md-list-item-inner > md-icon:first-child {
+	margin-left: 0.2rem;
+	margin-right: 2rem;
+	width: 24px;
+	box-sizing: content-box;
+}
+
+// Variables
+// ---------------------
+@table-header-font-weight:      400;
+@table-header-font-color:       #757575;
+
+@table-cell-padding:            1.6rem;
+@table-condensed-cell-padding:  @table-cell-padding/2;
+
+
+@table-bg:                      #fff;
+@table-bg-accent:               #f5f5f5;
+@table-bg-hover:                rgba(0,0,0,.12);
+@table-bg-active:               @table-bg-hover;
+@table-border-color:            #e0e0e0;
+
+
+// Mixins
+//
+// -----------------
+.transition(@transition) {
+  -webkit-transition: @transition;
+       -o-transition: @transition;
+          transition: @transition;
+}
+
+// Baseline styles
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  background-color: @table-bg;
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      .transition(all .3s ease);
+      > th,
+      > td {
+        text-align: left;
+        padding: @table-cell-padding;
+        vertical-align: top;
+        border-top: 0;
+        .transition(all .3s ease);
+      }
+    }
+  }
+  > thead > tr > th {
+    font-weight: @table-header-font-weight;
+    color: @table-header-font-color;
+    vertical-align: bottom;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+  }
+  > caption + thead,
+  > colgroup + thead,
+  > thead:first-child {
+    > tr:first-child {
+      > th,
+      > td {
+        border-top: 0;
+      }
+    }
+  }
+  > tbody + tbody {
+    border-top: 1px solid rgba(0,0,0,.12);
+  }
+}
+
+// Hover effect
+//
+.table-hover {
+  > tbody > tr:hover {
+    > td,
+    > th {
+      background-color: @table-bg-hover;
+    }
+  }
+}
+
+.table-responsive-vertical {
+
+  @media screen and (max-width: 768px) {
+
+    // Tighten up spacing
+    > .table {
+      margin-bottom: 0;
+      background-color: transparent;
+      > thead,
+      > tfoot {
+        display: none;
+      }
+
+      > tbody {
+        display: block;
+
+        > tr {
+          display: block;
+          border: 1px solid @table-border-color;
+          border-radius: 2px;
+          margin-bottom: @table-cell-padding;
+
+          > td {
+            background-color: @table-bg;
+            display: block;
+            vertical-align: middle;
+            text-align: right;
+          }
+          > td[data-title]:before {
+            content: attr(data-title);
+            float: left;
+            font-size: inherit;
+            font-weight: @table-header-font-weight;
+            color: @table-header-font-color;
+          }
+        }
+      }
+    }
+    // Special overrides for shadows
+    &.shadow-z-1 {
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      > .table > tbody > tr {
+        border: none;
+      }
+    }
+  }
+}
+*/

@@ -1,0 +1,39 @@
+<md-card layout-margin="" layout-fill="" style="height:auto"> <!-- style="height:auto" precisa disso para funcionar o layout-fill no chrome  -->
+	<div layout="row" layout-align="start center" ng-click="accountsVm.showHideDetails()">
+		<div flex="10" flex-xs="15" flex-sm="15" flex-md="10">
+			<md-icon>credit_card</md-icon> 
+		</div>
+		<div flex="">
+			<strong><span class="md-title" data-th-text="#{ui.labels.credit_data}"></span></strong>
+		</div>
+		<div flex="10" flex-xs="15" flex-sm="15" flex-md="15" style="text-align: right;">
+			<md-icon ng-show="$root.show">expand_less</md-icon>
+			<md-icon ng-hide="$root.show">expand_more</md-icon>
+		</div>		
+	</div>
+	
+	<div ng-show="$root.show" class="md-body-1">
+		<p><strong data-th-text="#{ui.labels.cpf}"></strong> {{accountsVm.accounts.cpf | formatCpf}}</p>
+		<p><strong data-th-text="#{ui.labels.financing_type}"></strong> {{accountsVm.accounts.financingType}}</p>
+		<p ng-if="accountsVm.accounts.checkingBankAcc">
+			<strong data-th-text="#{ui.labels.checking_account}"></strong>
+			 <span data-th-text="#{ui.labels.account_bank}"></span> {{accountsVm.accounts.checkingBankAcc.bankNumber}} 
+			 <span data-th-text="#{ui.labels.account_agency}"></span> {{accountsVm.accounts.checkingBankAcc.agencyNumber}} 
+			 <span data-th-text="#{ui.labels.account_account}"></span> {{accountsVm.accounts.checkingBankAcc.accountNumber}}
+		</p>
+		<p ng-if="accountsVm.accounts.institutionBankAcc">
+			<strong data-th-text="#{ui.labels.institutional_account}"></strong>
+			 <span data-th-text="#{ui.labels.account_bank}"></span> {{accountsVm.accounts.institutionBankAcc.bankNumber}} 
+			 <span data-th-text="#{ui.labels.account_agency}"></span> {{accountsVm.accounts.institutionBankAcc.agencyNumber}} 
+			 <span data-th-text="#{ui.labels.account_account}"></span> {{accountsVm.accounts.institutionBankAcc.accountNumber}}
+		</p>
+		<p ng-if="accountsVm.accounts.bankCard">
+			<strong data-th-text="#{ui.labels.research_card}"></strong>
+			 <span data-th-text="#{ui.labels.masking_card}" class="md-caption"></span>{{accountsVm.accounts.bankCard.segment4}} {{accountsVm.accounts.bankCard.cardStatus}}
+		</p>
+		<p ng-if="accountsVm.accounts.bankCard.validity">
+			<strong data-th-text="#{ui.labels.validity_card}"></strong>
+			{{accountsVm.accounts.bankCard.validity}}
+		</p>
+	</div>
+</md-card>

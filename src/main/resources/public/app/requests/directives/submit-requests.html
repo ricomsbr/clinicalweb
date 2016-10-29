@@ -1,0 +1,84 @@
+<md-card flex="" flex-xs="100" flex-sm="100" id="to-approval-id">
+<md-card-content>
+<div layout="row" flex="" layout-wrap=""
+	class="md-fab md-mini md-primary">
+	<div flex="100" flex-xs="100" flex-sm="100">
+		<strong data-th-text="#{ui.labels.period}"></strong>
+		<strong>{{vm.requests.interval.start | date : "dd/MM/yyyy HH:mm"}} - {{vm.requests.interval.end | date : "dd/MM/yyyy HH:mm"}}
+		</strong>
+	</div>
+	
+</div>
+<div layout="row" flex="" layout-wrap=""
+	ng-show="vm.requests.bgrs.length > 0" layout-align="center-center"
+	class="md-caption">
+	<div flex="10" flex-xs="100" flex-sm="100"></div>
+	<div flex="" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.process}"></div>
+	<div flex="" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.rubric}"></div>
+	<div flex="" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.quote_number}"></div>
+	<div flex="" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.quote_date}"></div>
+	<div flex="" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.creation_date}"></div>
+	<div flex="" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.reserve_value}"></div>
+	<div flex="" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.status}"></div>
+<!-- 	<div flex="10" flex-xs="100" flex-sm="100"></div> -->
+</div>
+<md-list ng-cloak=""
+	ng-repeat="request in vm.requests.bgrs | orderBy : 'creationDate' : true"
+	ng-show="vm.requests.bgrs.length > 0"> <md-list-item>
+<div flex="10" layout="row" layout-align="start center">
+	<md-button class="md-fab md-mini md-primary" aria-label="Mais info"
+		ng-click="vm.showRequestDetails($event,request)"> <md-icon
+		style="color:white;">search</md-icon> </md-button>
+</div>
+<div layout="row" flex="" layout-wrap="" layout-align="center-center">
+	<div flex="" flex-xs="100" flex-sm="100">
+		<strong>{{request.processNumber | formatProcessNumber}}</strong>
+	</div>
+	<div flex="" flex-xs="100" flex-sm="100">
+		<strong>{{request.rubricType.message}}</strong>
+	</div>
+	<div flex="" flex-xs="100" flex-sm="100">
+		<strong>{{request.quoteNumber}}</strong>
+	</div>
+	<div flex="" flex-xs="100" flex-sm="100">
+		<strong>{{request.quoteDate | date : "dd/MM/yyyy"}}</strong>
+	</div>
+	<div flex="" flex-xs="100" flex-sm="100">{{request.creationDate |
+		date : "dd/MM/yyyy HH:mm"}}</div>
+	<div flex="" flex-xs="100" flex-sm="100">{{request.requestedValue.currency.symbol}}{{request.requestedValue.amount
+		| currency:"":2}}</div>
+	<div flex="" flex-xs="100" flex-sm="100">{{request.currentState.message}}</div>
+</div>
+<!-- <div layout="row" layout-align="center center" flex="10" -->
+<!-- 	ng-show="request.canDelete"> -->
+<!-- 	<md-button data-th-title="#{ui.labels.remove}" -->
+<!-- 		data-th-aria-label="#{ui.labels.remove}" -->
+<!-- 		ng-click="vm.showRemoveDialog($event,request)"> <md-icon>delete</md-icon> -->
+<!-- 	</md-button> -->
+<!-- </div> -->
+</md-list-item> <md-divider ng-show="!$last"></md-divider> </md-list>
+<div ng-hide="vm.requests.bgrs.length > 0">
+	<p data-th-text="#{ui.messages.list_empty}"></p>
+</div>
+<md-divider></md-divider>
+<div layout="row"
+	layout-align="center end" layout-margin="">
+	<md-button ng-show="vm.requests.canSend" class="md-fab md-mini"
+		data-th-title="#{ui.labels.submit}"
+		data-th-attr="aria-label=#{ui.labels.submit}"
+		ng-click="vm.showSubmitDialog($event)"> <md-icon
+		style="color:white;">send</md-icon> </md-button>
+	<md-button ng-hide="vm.requests.canSend" class="md-fab md-mini"
+		data-th-title="#{ui.labels.submit}"
+		data-th-attr="aria-label=#{ui.labels.submit}"
+		ng-disabled="!vm.requests.canSend"> <md-icon
+		style="color:white;">send</md-icon> </md-button>
+</div>
+</md-card-content> </md-card>

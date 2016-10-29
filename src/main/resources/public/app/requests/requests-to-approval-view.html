@@ -1,0 +1,64 @@
+<md-card flex="100" flex-xs="100" flex-sm="100" id="to-approval-id" layout-padding="">
+<md-card-content>
+<div layout="row" layout-wrap="" layout-align="center-center"
+	class="md-caption">
+	<div flex="5"></div>
+	<div flex="15" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.process_number}"></div>
+	<div flex="5" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.rubric}"></div>
+	<div flex="5" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.quote_number}"></div>
+	<div flex="10" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.quote_date}"></div>
+	<div flex="15" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.creation_date}"></div>
+	<div flex="10" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.reserve_value}"></div>
+	<div flex="20" flex-xs="100" flex-sm="100"
+		data-th-text="#{ui.labels.status}"></div>
+	<div flex="15"></div>
+</div>
+<div layout="row" layout-wrap="" layout-align="start-center"
+	ng-repeat="request in view.requestList | orderBy: 'creationDate' ">
+	<div flex="5">
+		<md-button class="md-fab md-mini md-primary" aria-label="Mais info"
+			ng-click="view.goToRequest($event,request)"> <md-icon
+			style="color:white;">search</md-icon> </md-button>
+	</div>
+	<div flex="15" flex-xs="100" flex-sm="100">
+		<strong>{{request.processNumber | formatProcessNumber}}</strong>
+	</div>
+	<div flex="5" flex-xs="100" flex-sm="100">
+		<strong>{{request.rubricType.message}}</strong>
+	</div>
+	<div flex="5" flex-xs="100" flex-sm="100">
+		<strong>{{request.quoteNumber}}</strong>
+	</div>
+	<div flex="10" flex-xs="100" flex-sm="100">
+		<strong>{{request.quoteDate | date : "dd/MM/yyyy"}}</strong>
+	</div>
+	<div flex="15" flex-xs="100" flex-sm="100">{{request.creationDate
+		| date : "dd/MM/yyyy HH:mm"}}</div>
+	<div flex="10" flex-xs="100" flex-sm="100">{{request.requestedValue.currency.symbol}} {{request.requestedValue.amount
+		| currency:"":2}}</div>
+	<div flex="20" flex-xs="100" flex-sm="100">{{request.currentState.message}}</div>
+	<div flex="15">
+		<md-button class="md-fab md-mini md-warn md-hue-3"
+			data-th-title="#{ui.labels.to_approval.button.reject}"
+			ng-disabled="request.currentState.enum == 'APPROVAL_REJECTED'"
+			data-th-attr="aria-label=#{ui.labels.to_approval.button.reject}"
+			ng-click="view.show_reject($event,request)"> <md-icon
+			style="color:white;">thumb_down</md-icon> </md-button>
+		<md-button class="md-fab md-mini md-primary md-hue-3"
+			data-th-title="#{ui.labels.to_approval.button.approve}"
+			ng-disabled="request.currentState.enum == 'WAITING_PROCESS'"
+			data-th-attr="aria-label=#{ui.labels.to_approval.button.approve}"
+			ng-click="view.show_approve($event,request)"> <md-icon
+			style="color:white;">thumb_up</md-icon> </md-button>
+	</div>
+</div>
+<div ng-hide="view.requestList.length > 0">
+	<p data-th-text="#{ui.messages.request_list_empty}"></p>
+</div>
+</md-card-content> </md-card>

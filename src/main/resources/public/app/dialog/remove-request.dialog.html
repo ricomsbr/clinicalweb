@@ -1,0 +1,23 @@
+<md-dialog aria-label="Solicitação">
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2 data-th-text="#{ui.labels.exclude}"></h2>
+				<span flex=""></span>
+				<md-button class="md-icon-button" ng-click="dc.cancel()"> 
+					<md-icon aria-label="Close dialog">close</md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-dialog-content layout-padding="" class="md-body-1 black-text">
+			<div>
+				<p data-th-text="#{ui.messages.confirm_delete}"></p>
+				<md-divider></md-divider>
+				<div style="text-align:center;">
+					<md-button class="md-mini md-raised" ng-click="dc.cancel()" data-th-text="#{ui.labels.to_approval.approve.dialog.no}">
+			        </md-button>
+			        <md-button class="md-mini md-raised" ng-click="dc.remove($event)" data-th-text="#{ui.labels.to_approval.approve.dialog.yes}">
+			        </md-button>
+				</div>
+			</div>
+		</md-dialog-content>
+</md-dialog>

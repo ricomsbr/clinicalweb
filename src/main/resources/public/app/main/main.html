@@ -1,0 +1,16 @@
+<div layout="row" layout-fill>
+	<app-sidebar layout="row"></app-sidebar>
+	<div layout="column" tabindex="-1" flex>
+		<md-toolbar class="c-navbar" md-whiteframe="1">
+			<div class="md-toolbar-tools">
+				<md-button class="md-icon-button" aria-label="menu" hide-gt-md ng-click="$ctrl.toggle()"> 
+					<md-icon alt="navicon">menu</md-icon>
+				</md-button>
+				<h3 class="md-headline">
+					<span ng-bind="$ctrl.mainService.title"></span>
+				</h3>
+			</div>
+		</md-toolbar>
+		<ui-view id="content-view" layout="column" class="o-content-view"></ui-view>
+	</div>
+</div>
